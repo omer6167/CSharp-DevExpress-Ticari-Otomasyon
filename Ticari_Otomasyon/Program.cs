@@ -1,8 +1,12 @@
-﻿using System;
+﻿using DevExpress.CodeParser;
+using DevExpress.Diagram.Core.Shapes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.CodeParser.CodeStyle.Formatting.Rules.Spacing.Parentheses;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Ticari_Otomasyon
 {
@@ -14,9 +18,12 @@ namespace Ticari_Otomasyon
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new login());
+            //For desktop applications, add the following line of code to run before any spatial operations are performed:
+
+            //SqlServerTypes.Utilities.LoadNativeAssemblies(AppDomain.CurrentDomain.BaseDirectory);
+            System.Windows.Forms.Application.EnableVisualStyles();
+            System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+            System.Windows.Forms.Application.Run(new login());
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Ticari_Otomasyon
     internal class Database
     {
         public SqlConnection Connection() {
-            SqlConnection sqlConnection = new SqlConnection(@"Data Source=KADIR\SQLEXPRESS;Initial Catalog=TicariOtomasyon;Integrated Security=True");
+            SqlConnection sqlConnection = new SqlConnection(@"Data Source=OKUCUK\SQLEXPRESS;Initial Catalog=SalonOtomasyon;Integrated Security=True");
             sqlConnection.Open();
             return sqlConnection; 
         }

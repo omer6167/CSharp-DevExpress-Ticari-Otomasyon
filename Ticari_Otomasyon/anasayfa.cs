@@ -63,12 +63,12 @@ namespace Ticari_Otomasyon
 
         private void anasayfa_Load(object sender, EventArgs e)
         {
-            webBrowser1.Navigate("https://tcmb.gov.tr/kurlar/today.xml");
-            listele();
-            haberler();
-            notlar();
-            hareketler();
-            fihrist();
+            //webBrowser1.Navigate("https://tcmb.gov.tr/kurlar/today.xml");
+            //listele();
+            //haberler();
+            //notlar();
+            //hareketler();
+            //fihrist();
         }
     }
 }

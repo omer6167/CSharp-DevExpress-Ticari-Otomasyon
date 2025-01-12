@@ -9,13 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using DevExpress.XtraBars.Ribbon.Internal;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Ticari_Otomasyon
 {
     public partial class musteriler : Form
     {
         Database database = new Database();
-        sehirler sehirler = new sehirler();
+
+        string masaustu = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
 
         public musteriler()
         {
@@ -24,59 +28,86 @@ namespace Ticari_Otomasyon
 
         private void temizle()
         {
-            textId.Text = "";
             textAd.Text = "";
             textSoyad.Text = "";
-            maskedTel.Text = "";
-            maskedTel2.Text = "";
+            maskedTel.Text = "";            
             maskedTC.Text = "";
             textMail.Text = "";
-            comboil.Text = "";
-            comboilce.Text = "";
             richAdres.Text = "";
-            textVergi.Text = "";
         }
 
         private void Listele()
         {
             DataTable dt = new DataTable();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM musteriler", database.Connection());
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT * FROM TBL_Musteriler", database.Connection());
             sqlDataAdapter.Fill(dt);
             gridControl1.DataSource = dt;
         }
 
         private void Musteriler_Load(object sender, EventArgs e)
         {
-            sehirler.iller(comboil);
             Listele();
             temizle();
         }
+       
+        Database bgl = new Database();
 
-        private void comboil_SelectedIndexChanged(object sender, EventArgs e)
+        void listele()
         {
-            sehirler.ilceler(comboil.SelectedIndex + 1, comboilce);
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection connection = bgl.Connection())
+                {
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM TBL_Musteriler", connection);
+                    da.Fill(dt);
+                    gridControl1.DataSource = dt;
+
+                    if (dt.Rows.Count == 0)
+                    {
+                        MessageBox.Show($"Veri Yok");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Bir hata oluştu: {ex.Message}");
+            }
+
+
         }
 
+
+        public string cinsiyet;
+        public string yeniyol;
+        
+        
         private void btnKaydet_Click(object sender, EventArgs e)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("insert into musteriler (ad,soyad,telefon,telefon2,tc,mail,il,ilce,adres,vergidaire) VALUES (@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8,@p9,@p10)", database.Connection());
-                cmd.Parameters.AddWithValue("@p1", textAd.Text);
-                cmd.Parameters.AddWithValue("@p2", textSoyad.Text);
-                cmd.Parameters.AddWithValue("@p3", maskedTel.Text);
-                cmd.Parameters.AddWithValue("@p4", maskedTel2.Text);
-                cmd.Parameters.AddWithValue("@p5", maskedTC.Text);
-                cmd.Parameters.AddWithValue("@p6", textMail.Text);
-                cmd.Parameters.AddWithValue("@p7", comboil.Text);
-                cmd.Parameters.AddWithValue("@p8", comboilce.Text);
-                cmd.Parameters.AddWithValue("@p9", richAdres.Text);
-                cmd.Parameters.AddWithValue("@p10", textVergi.Text);
-                cmd.ExecuteNonQuery();
-                database.Connection().Close();
-                MessageBox.Show("Müşteri başarıyla eklendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Listele();
-                temizle();
+                SqlCommand komut = new SqlCommand("INSERT INTO TBL_Musteriler (Ad, Soyad, Cinsiyet, DogumTarihi, KayitTarihi, TCNo, Email, Telefon, Adres, Fotoğraf) values(@pAd,@pSoyad,@pCinsiyet,@pDogumTarihi,@pKayitTarihi,@pTCNo,@pEmail,@pTelefon,@pAdres,@pFotoğraf,DEFAULT,DEFAULT)", bgl.Connection());
+                komut.Parameters.AddWithValue("@pAd", textAd.Text);
+                komut.Parameters.AddWithValue("@pSoyad", textSoyad.Text);
+                if (rdbErkek.Checked == true)
+                {
+                    komut.Parameters.AddWithValue("@pCinsiyet", cinsiyet = "E");
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("pCinsiyet", cinsiyet = "K");
+                }
+                komut.Parameters.AddWithValue("@pDogumTarihi", dtDogum.Value.ToString());
+                komut.Parameters.AddWithValue("@pKayitTarihi", DateTime.Now.ToString());
+                komut.Parameters.AddWithValue("@pTCNo", maskedTC.Text);
+                komut.Parameters.AddWithValue("@pEmail", textMail.Text);
+                komut.Parameters.AddWithValue("@pTelefon", maskedTel.Text);
+                komut.Parameters.AddWithValue("@pAdres", richAdres.Text);
+                komut.Parameters.AddWithValue("@pFotoğraf", Path.GetFileName(yeniyol));
+                komut.ExecuteNonQuery();
+                bgl.Connection().Close();
+                MessageBox.Show("Üye Eklendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listele();
             }
             catch
             {
@@ -89,66 +120,113 @@ namespace Ticari_Otomasyon
             DialogResult dialogResult = MessageBox.Show("Müşteriyi gerçekten silmek istiyor musun ?", "Önemli", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (dialogResult == DialogResult.Yes)
             {
-                SqlCommand cmd = new SqlCommand("delete from musteriler where id = @p1", database.Connection());
-                cmd.Parameters.AddWithValue("@p1", textId.Text);
-                cmd.ExecuteNonQuery();
-                database.Connection().Close();
-                MessageBox.Show("Müşteri başarıyla silindi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Listele();
+                SqlCommand komut = new SqlCommand("UPDATE TBL_Musteriler SET Deleted = 1 WHERE ID = @pId;", bgl.Connection());
+                komut.Parameters.AddWithValue("@pId", textId.Text);
+                komut.ExecuteNonQuery();
+                bgl.Connection().Close();
+                MessageBox.Show("Üye Silindi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listele();
                 temizle();
             }
         }
 
         private void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            DataRow dataRow = gridView1.GetDataRow(gridView1.FocusedRowHandle);
-            if (dataRow != null)
+            try
             {
-                textId.Text = dataRow["id"].ToString();
-                textAd.Text = dataRow["ad"].ToString();
-                textSoyad.Text = dataRow["soyad"].ToString();
-                maskedTel.Text = dataRow["telefon"].ToString();
-                maskedTel2.Text = dataRow["telefon2"].ToString();
-                maskedTC.Text = dataRow["tc"].ToString();
-                textMail.Text = dataRow["mail"].ToString();
-                comboil.Text = dataRow["il"].ToString();
-                comboilce.Text = dataRow["ilce"].ToString();
-                richAdres.Text = dataRow["adres"].ToString();
-                textVergi.Text = dataRow["vergidaire"].ToString();
+                DataRow dr = gridView1.GetDataRow(gridView1.FocusedRowHandle);
+                if (dr != null)
+                {
+
+                    if (dr != null)
+                    {
+                        textId.Text = dr["ID"].ToString();
+                        textAd.Text = dr["Ad"].ToString();
+                        textSoyad.Text = dr["Soyad"].ToString();
+                        if (dr["Cinsiyet"].ToString() == "Erkek")
+                        {
+                            rdbErkek.Checked = true;
+                        }
+                        else
+                        {
+                            rdbKadin.Checked = true;
+                        }
+                        dtDogum.Text = dr["DogumTarihi"].ToString();
+                        //dateKayıt.Text = dr["KayitTarihi"].ToString();
+                        maskedTel.Text = dr["TCNo"].ToString();
+                        textMail.Text = dr["Email"].ToString();
+                        maskedTel.Text = dr["Telefon"].ToString();
+                        richAdres.Text = dr["Adres"].ToString();
+
+                        yeniyol = masaustu + "spor salonu otomasyonu\\SporSalonuOtomasyonu" + "\\Resimler\\" + dr["Fotoğraf"].ToString();
+                        if (!string.IsNullOrEmpty(yeniyol))
+                            pcrResim.ImageLocation = yeniyol;
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hata", "Hata;"+JsonConvert.SerializeObject(ex), MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
 
         private void btnGüncelle_Click(object sender, EventArgs e)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("update musteriler set ad=@p1,soyad=@p2,telefon=@p3,telefon2=@p4,tc=@p5,mail=@p6,il=@p7,ilce=@p8,adres=@p9,vergidaire=@p10 where id = @p11", database.Connection());
-                cmd.Parameters.AddWithValue("@p1", textAd.Text);
-                cmd.Parameters.AddWithValue("@p2", textSoyad.Text);
-                cmd.Parameters.AddWithValue("@p3", maskedTel.Text);
-                cmd.Parameters.AddWithValue("@p4", maskedTel2.Text);
-                cmd.Parameters.AddWithValue("@p5", maskedTC.Text);
-                cmd.Parameters.AddWithValue("@p6", textMail.Text);
-                cmd.Parameters.AddWithValue("@p7", comboil.Text);
-                cmd.Parameters.AddWithValue("@p8", comboilce.Text);
-                cmd.Parameters.AddWithValue("@p9", richAdres.Text);
-                cmd.Parameters.AddWithValue("@p10", textVergi.Text);
-                cmd.Parameters.AddWithValue("@p11", textId.Text);
-                cmd.ExecuteNonQuery();
-                database.Connection().Close();
-                MessageBox.Show("Müşteri başarıyla güncellendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Listele();
-                temizle();
+                SqlCommand komut = new SqlCommand("UPDATE TBL_Musteriler SET Ad = @pAd, Soyad = @pSoyad, Cinsiyet = @pCinsiyet, DogumTarihi = @pDogumTarihi, TCNo = @pTCNo, Email = @pEmail, Telefon = @pTelefon, Adres = @pAdres, Fotoğraf = @pFotoğraf WHERE ID = @pID;", bgl.Connection());
+                komut.Parameters.AddWithValue("@pAd", textAd.Text);
+                komut.Parameters.AddWithValue("@pSoyad", textSoyad.Text);
+                if (rdbErkek.Checked == true)
+                {
+                    komut.Parameters.AddWithValue("@pCinsiyet", cinsiyet = "E");
+                }
+                else
+                {
+                    komut.Parameters.AddWithValue("pDogumTarihi", cinsiyet = "K");
+                }
+                
+                komut.Parameters.AddWithValue("@pTCNo", maskedTC.Text);
+                komut.Parameters.AddWithValue("@pEmail", textMail.Text);
+                komut.Parameters.AddWithValue("@pTelefon", maskedTel.Text);
+                komut.Parameters.AddWithValue("@pAdres", richAdres.Text);
+                komut.Parameters.AddWithValue("@Fotoğraf", Path.GetFileName(yeniyol));
+                komut.Parameters.AddWithValue("p11", textId.Text);
+                komut.ExecuteNonQuery();
+                bgl.Connection().Close();
+                MessageBox.Show("Üye Bilgileri Yenilendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listele();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Hatalı veri girişi yapıldı. Lütfen yeniden deneyiniz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hata", "Hata;" + JsonConvert.SerializeObject(ex), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnTemizle_Click(object sender, EventArgs e)
         {
             temizle();
+        }
+
+        private void pcrResim_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog dosya = new OpenFileDialog();
+                dosya.Filter = "Resim Dosyası|*.jpg;*png;*nef|Tüm Dosyalar|*.*";
+                dosya.ShowDialog();
+                string dosyayolu = dosya.FileName;
+                yeniyol = masaustu + "spor salonu otomasyonu\\SporSalonuOtomasyonu" + "\\Resimler\\" + Guid.NewGuid().ToString() + dosya.DefaultExt;
+                File.Copy(dosyayolu, yeniyol);
+                pcrResim.ImageLocation = yeniyol;
+
+            }
+            catch (Exception)
+            {
+                yeniyol = "";
+            }
+            
         }
     }
 }

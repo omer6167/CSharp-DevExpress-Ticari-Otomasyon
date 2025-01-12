@@ -67,6 +67,7 @@
             // 
             // textEdit1
             // 
+            this.textEdit1.EditValue = "admin";
             this.textEdit1.Location = new System.Drawing.Point(290, 103);
             this.textEdit1.Name = "textEdit1";
             this.textEdit1.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -87,6 +88,7 @@
             // 
             // textEdit2
             // 
+            this.textEdit2.EditValue = "123";
             this.textEdit2.Location = new System.Drawing.Point(290, 168);
             this.textEdit2.Name = "textEdit2";
             this.textEdit2.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -114,11 +116,11 @@
             this.labelControl3.Appearance.ForeColor = System.Drawing.Color.White;
             this.labelControl3.Appearance.Options.UseFont = true;
             this.labelControl3.Appearance.Options.UseForeColor = true;
-            this.labelControl3.Location = new System.Drawing.Point(70, 12);
+            this.labelControl3.Location = new System.Drawing.Point(137, 12);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(457, 29);
+            this.labelControl3.Size = new System.Drawing.Size(288, 29);
             this.labelControl3.TabIndex = 6;
-            this.labelControl3.Text = "Beyaz Eşya Mağazası Otomasyon Programı";
+            this.labelControl3.Text = "Salon Otomasyon Programı";
             // 
             // labelControl4
             // 
@@ -150,7 +152,7 @@
             this.MaximizeBox = false;
             this.Name = "login";
             this.ShowIcon = false;
-            this.Text = "Beyaz Eşya Servisi / Giriş Yap";
+            this.Text = "Salon Otomasyon / Giriş Yap";
             this.Load += new System.EventHandler(this.login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
