@@ -475,3 +475,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+/Ticari_Otomasyon/SqlServerTypes/x86/msvcr120.dll
+/Ticari_Otomasyon/SqlServerTypes/x86/msvcr120.dll
+/Ticari_Otomasyon/SqlServerTypes/x86/SqlServerSpatial140.dll
+/Ticari_Otomasyon/SqlServerTypes/x64/msvcr120.dll
+/Ticari_Otomasyon/SqlServerTypes/x64/SqlServerSpatial140.dll
