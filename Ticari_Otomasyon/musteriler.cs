@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using DevExpress.XtraBars.Ribbon.Internal;
 using System.IO;
 using Newtonsoft.Json;
+using DevExpress.Pdf.Native.BouncyCastle.Utilities.Collections;
 
 namespace Ticari_Otomasyon
 {
@@ -28,6 +29,7 @@ namespace Ticari_Otomasyon
 
         private void temizle()
         {
+            textId.Text = string.Empty;
             textAd.Text = "";
             textSoyad.Text = "";
             maskedTel.Text = "";            
@@ -86,7 +88,10 @@ namespace Ticari_Otomasyon
         {
             try
             {
-                SqlCommand komut = new SqlCommand("INSERT INTO TBL_Musteriler (Ad, Soyad, Cinsiyet, DogumTarihi, KayitTarihi, TCNo, Email, Telefon, Adres, Fotoğraf) values(@pAd,@pSoyad,@pCinsiyet,@pDogumTarihi,@pKayitTarihi,@pTCNo,@pEmail,@pTelefon,@pAdres,@pFotoğraf,DEFAULT,DEFAULT)", bgl.Connection());
+
+                
+
+                SqlCommand komut = new SqlCommand("INSERT INTO TBL_Musteriler (Ad, Soyad, Cinsiyet, DogumTarihi, KayitTarihi, TCNo, Email, Telefon, Adres, Fotoğraf,Deleted, Statu) values(@pAd,@pSoyad,@pCinsiyet,@pDogumTarihi,@pKayitTarihi,@pTCNo,@pEmail,@pTelefon,@pAdres,@pFotoğraf,DEFAULT,DEFAULT)", bgl.Connection());
                 komut.Parameters.AddWithValue("@pAd", textAd.Text);
                 komut.Parameters.AddWithValue("@pSoyad", textSoyad.Text);
                 if (rdbErkek.Checked == true)
@@ -97,8 +102,8 @@ namespace Ticari_Otomasyon
                 {
                     komut.Parameters.AddWithValue("pCinsiyet", cinsiyet = "K");
                 }
-                komut.Parameters.AddWithValue("@pDogumTarihi", dtDogum.Value.ToString());
-                komut.Parameters.AddWithValue("@pKayitTarihi", DateTime.Now.ToString());
+                komut.Parameters.AddWithValue("@pDogumTarihi", DateTime.Parse(dtDogum.Value.ToString()));
+                komut.Parameters.AddWithValue("@pKayitTarihi", DateTime.Now);
                 komut.Parameters.AddWithValue("@pTCNo", maskedTC.Text);
                 komut.Parameters.AddWithValue("@pEmail", textMail.Text);
                 komut.Parameters.AddWithValue("@pTelefon", maskedTel.Text);
@@ -109,9 +114,9 @@ namespace Ticari_Otomasyon
                 MessageBox.Show("Üye Eklendi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 listele();
             }
-            catch
+            catch(Exception ex)
             {
-                MessageBox.Show("Hatalı veri girişi yapıldı. Lütfen yeniden deneyiniz", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Hata;" + JsonConvert.SerializeObject(ex), " Hatalı veri girişi yapıldı. Lütfen yeniden deneyiniz", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -135,34 +140,31 @@ namespace Ticari_Otomasyon
             try
             {
                 DataRow dr = gridView1.GetDataRow(gridView1.FocusedRowHandle);
-                if (dr != null)
+                if(dr == null)
+                    return;
+
+                textId.Text = dr["ID"].ToString();
+                textAd.Text = dr["Ad"].ToString();
+                textSoyad.Text = dr["Soyad"].ToString();
+                if (dr["Cinsiyet"].ToString() == "Erkek")
                 {
-
-                    if (dr != null)
-                    {
-                        textId.Text = dr["ID"].ToString();
-                        textAd.Text = dr["Ad"].ToString();
-                        textSoyad.Text = dr["Soyad"].ToString();
-                        if (dr["Cinsiyet"].ToString() == "Erkek")
-                        {
-                            rdbErkek.Checked = true;
-                        }
-                        else
-                        {
-                            rdbKadin.Checked = true;
-                        }
-                        dtDogum.Text = dr["DogumTarihi"].ToString();
-                        //dateKayıt.Text = dr["KayitTarihi"].ToString();
-                        maskedTel.Text = dr["TCNo"].ToString();
-                        textMail.Text = dr["Email"].ToString();
-                        maskedTel.Text = dr["Telefon"].ToString();
-                        richAdres.Text = dr["Adres"].ToString();
-
-                        yeniyol = masaustu + "spor salonu otomasyonu\\SporSalonuOtomasyonu" + "\\Resimler\\" + dr["Fotoğraf"].ToString();
-                        if (!string.IsNullOrEmpty(yeniyol))
-                            pcrResim.ImageLocation = yeniyol;
-                    }
+                    rdbErkek.Checked = true;
                 }
+                else
+                {
+                    rdbKadin.Checked = true;
+                }
+                dtDogum.Text = dr["DogumTarihi"].ToString();
+                //dateKayıt.Text = dr["KayitTarihi"].ToString();
+                maskedTel.Text = dr["TCNo"].ToString();
+                textMail.Text = dr["Email"].ToString();
+                maskedTel.Text = dr["Telefon"].ToString();
+                richAdres.Text = dr["Adres"].ToString();
+
+                yeniyol = masaustu + "spor salonu otomasyonu\\SporSalonuOtomasyonu" + "\\Resimler\\" + dr["Fotoğraf"].ToString();
+                if (!string.IsNullOrEmpty(yeniyol))
+                    pcrResim.ImageLocation = yeniyol;
+                
             }
             catch (Exception ex)
             {

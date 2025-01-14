@@ -48,13 +48,13 @@
             this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
             this.btnTemizle = new DevExpress.XtraEditors.SimpleButton();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.pcrResim = new System.Windows.Forms.PictureBox();
+            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            this.dtDogum = new System.Windows.Forms.DateTimePicker();
+            this.rdbKadin = new System.Windows.Forms.RadioButton();
+            this.rdbErkek = new System.Windows.Forms.RadioButton();
             this.textId = new DevExpress.XtraEditors.TextEdit();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.rdbErkek = new System.Windows.Forms.RadioButton();
-            this.rdbKadin = new System.Windows.Forms.RadioButton();
-            this.dtDogum = new System.Windows.Forms.DateTimePicker();
-            this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.pcrResim = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textAd.Properties)).BeginInit();
@@ -62,8 +62,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.textMail.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcrResim)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textId.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControl1
@@ -286,6 +286,54 @@
             this.groupControl1.TabIndex = 3;
             this.groupControl1.Text = "groupControl1";
             // 
+            // pcrResim
+            // 
+            this.pcrResim.Location = new System.Drawing.Point(258, 5);
+            this.pcrResim.Name = "pcrResim";
+            this.pcrResim.Size = new System.Drawing.Size(165, 91);
+            this.pcrResim.TabIndex = 55;
+            this.pcrResim.TabStop = false;
+            this.pcrResim.Click += new System.EventHandler(this.pcrResim_Click);
+            // 
+            // labelControl5
+            // 
+            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.labelControl5.Appearance.Options.UseFont = true;
+            this.labelControl5.Location = new System.Drawing.Point(35, 281);
+            this.labelControl5.Name = "labelControl5";
+            this.labelControl5.Size = new System.Drawing.Size(52, 18);
+            this.labelControl5.TabIndex = 54;
+            this.labelControl5.Text = "Doğum:";
+            // 
+            // dtDogum
+            // 
+            this.dtDogum.Location = new System.Drawing.Point(90, 281);
+            this.dtDogum.Name = "dtDogum";
+            this.dtDogum.Size = new System.Drawing.Size(139, 21);
+            this.dtDogum.TabIndex = 53;
+            // 
+            // rdbKadin
+            // 
+            this.rdbKadin.AutoSize = true;
+            this.rdbKadin.Location = new System.Drawing.Point(177, 321);
+            this.rdbKadin.Name = "rdbKadin";
+            this.rdbKadin.Size = new System.Drawing.Size(51, 17);
+            this.rdbKadin.TabIndex = 52;
+            this.rdbKadin.TabStop = true;
+            this.rdbKadin.Text = "Kadın";
+            this.rdbKadin.UseVisualStyleBackColor = true;
+            // 
+            // rdbErkek
+            // 
+            this.rdbErkek.AutoSize = true;
+            this.rdbErkek.Location = new System.Drawing.Point(109, 321);
+            this.rdbErkek.Name = "rdbErkek";
+            this.rdbErkek.Size = new System.Drawing.Size(51, 17);
+            this.rdbErkek.TabIndex = 51;
+            this.rdbErkek.TabStop = true;
+            this.rdbErkek.Text = "Erkek";
+            this.rdbErkek.UseVisualStyleBackColor = true;
+            // 
             // textId
             // 
             this.textId.Location = new System.Drawing.Point(91, 5);
@@ -305,54 +353,6 @@
             this.labelControl1.TabIndex = 49;
             this.labelControl1.Text = "Id:";
             // 
-            // rdbErkek
-            // 
-            this.rdbErkek.AutoSize = true;
-            this.rdbErkek.Location = new System.Drawing.Point(109, 321);
-            this.rdbErkek.Name = "rdbErkek";
-            this.rdbErkek.Size = new System.Drawing.Size(51, 17);
-            this.rdbErkek.TabIndex = 51;
-            this.rdbErkek.TabStop = true;
-            this.rdbErkek.Text = "Erkek";
-            this.rdbErkek.UseVisualStyleBackColor = true;
-            // 
-            // rdbKadin
-            // 
-            this.rdbKadin.AutoSize = true;
-            this.rdbKadin.Location = new System.Drawing.Point(177, 321);
-            this.rdbKadin.Name = "rdbKadin";
-            this.rdbKadin.Size = new System.Drawing.Size(51, 17);
-            this.rdbKadin.TabIndex = 52;
-            this.rdbKadin.TabStop = true;
-            this.rdbKadin.Text = "Kadın";
-            this.rdbKadin.UseVisualStyleBackColor = true;
-            // 
-            // dtDogum
-            // 
-            this.dtDogum.Location = new System.Drawing.Point(90, 281);
-            this.dtDogum.Name = "dtDogum";
-            this.dtDogum.Size = new System.Drawing.Size(139, 21);
-            this.dtDogum.TabIndex = 53;
-            // 
-            // labelControl5
-            // 
-            this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl5.Appearance.Options.UseFont = true;
-            this.labelControl5.Location = new System.Drawing.Point(35, 281);
-            this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(52, 18);
-            this.labelControl5.TabIndex = 54;
-            this.labelControl5.Text = "Doğum:";
-            // 
-            // pcrResim
-            // 
-            this.pcrResim.Location = new System.Drawing.Point(258, 5);
-            this.pcrResim.Name = "pcrResim";
-            this.pcrResim.Size = new System.Drawing.Size(165, 91);
-            this.pcrResim.TabIndex = 55;
-            this.pcrResim.TabStop = false;
-            this.pcrResim.Click += new System.EventHandler(this.pcrResim_Click);
-            // 
             // musteriler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -361,7 +361,7 @@
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gridControl1);
             this.Name = "musteriler";
-            this.Text = "Musteriler";
+            this.Text = "Üyeler";
             this.Load += new System.EventHandler(this.Musteriler_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -371,8 +371,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcrResim)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textId.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

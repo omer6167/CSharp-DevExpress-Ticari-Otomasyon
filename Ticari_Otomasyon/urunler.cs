@@ -32,6 +32,9 @@ namespace Ticari_Otomasyon
         {
             textId.Text = "";
             textAd.Text = "";
+            textFiyat.Text = "";
+            textSure.Text = "";
+
             
         }
 
@@ -45,7 +48,7 @@ namespace Ticari_Otomasyon
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("INSERT INTO URUN_PAKETLERI (Ad, Fiyat, Fotoğraf, Sure) VALUES (@pAd, @pFiyat, @pFotoğraf, @pSure);", database.Connection());
+                SqlCommand cmd = new SqlCommand("INSERT INTO TBL_URUN_PAKETLERI (Ad, Fiyat, Fotoğraf, Sure) VALUES (@pAd, @pFiyat, @pFotoğraf, @pSure);", database.Connection());
                 cmd.Parameters.AddWithValue("@pAd", textAd.Text);
                 cmd.Parameters.AddWithValue("@pFiyat", textFiyat.Text);
                 cmd.Parameters.AddWithValue("@pFotoğraf", yol);
@@ -59,7 +62,7 @@ namespace Ticari_Otomasyon
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata", "Hata;" + JsonConvert.SerializeObject(ex), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hata;" + JsonConvert.SerializeObject(ex), "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -68,7 +71,8 @@ namespace Ticari_Otomasyon
             try
             {
                 DataRow dt = gridView1.GetDataRow(gridView1.FocusedRowHandle);
-                textId.Text = dt["Id"].ToString();
+                //MessageBox.Show( JsonConvert.SerializeObject(dt));
+                textId.Text = dt["ID"].ToString();
                 textAd.Text = dt["Ad"].ToString();
                 textFiyat.Text = dt["Fiyat"].ToString();
                 yol = dt["Fotoğraf"].ToString();
@@ -76,7 +80,7 @@ namespace Ticari_Otomasyon
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata", "Hata;" + JsonConvert.SerializeObject(ex), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hata;" + JsonConvert.SerializeObject(ex), "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -85,8 +89,8 @@ namespace Ticari_Otomasyon
             DialogResult dialogResult = MessageBox.Show("Kaydı silmek istiyor musunuz ?", "Uyarı", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (dialogResult == DialogResult.Yes)
             {
-                SqlCommand cmd = new SqlCommand("delete from urunler where id = @p1", database.Connection());
-                cmd.Parameters.AddWithValue("@p1", textId.Text);
+                SqlCommand cmd = new SqlCommand("UPDATE TBL_URUN_PAKETLERI SET Deleted = 1 WHERE ID = @pID", database.Connection());
+                cmd.Parameters.AddWithValue("@pID", textId.Text);
                 cmd.ExecuteNonQuery();
                 database.Connection().Close();
                 MessageBox.Show("Ürün başarıyla silindi.", "Bilgi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -99,7 +103,7 @@ namespace Ticari_Otomasyon
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("UPDATE URUN_PAKETLERI SET Ad = @pAd, Fiyat = @pFiyat, Fotoğraf = @pFotoğraf, Sure = @pSure WHERE ID = @pID;", database.Connection());
+                SqlCommand cmd = new SqlCommand("UPDATE TBL_URUN_PAKETLERI SET Ad = @pAd, Fiyat = @pFiyat, Fotoğraf = @pFotoğraf, Sure = @pSure WHERE ID = @pID;", database.Connection());
                 cmd.Parameters.AddWithValue("@pAd", textAd.Text);
                 cmd.Parameters.AddWithValue("@pFiyat", textFiyat.Text);
                 cmd.Parameters.AddWithValue("@pFotoğraf", yol);
@@ -113,7 +117,7 @@ namespace Ticari_Otomasyon
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Hata", "Hata;" + JsonConvert.SerializeObject(ex), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Hata;" + JsonConvert.SerializeObject(ex), "Hata", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

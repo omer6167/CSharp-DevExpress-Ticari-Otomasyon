@@ -269,6 +269,12 @@
     <Compile Include="urunler.Designer.cs">
       <DependentUpon>urunler.cs</DependentUpon>
     </Compile>
+    <Compile Include="uyelik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="uyelik.Designer.cs">
+      <DependentUpon>uyelik.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="anasayfa.resx">
       <DependentUpon>anasayfa.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="urunler.resx">
       <DependentUpon>urunler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uyelik.resx">
+      <DependentUpon>uyelik.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

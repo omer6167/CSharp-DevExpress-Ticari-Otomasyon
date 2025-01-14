@@ -38,7 +38,7 @@
             this.btnFirmalar = new DevExpress.XtraBars.BarButtonItem();
             this.btnPersoneller = new DevExpress.XtraBars.BarButtonItem();
             this.btnGiderler = new DevExpress.XtraBars.BarButtonItem();
-            this.btnKasa = new DevExpress.XtraBars.BarButtonItem();
+            this.btnUyelik = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem16 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -61,10 +61,10 @@
             this.btnFirmalar,
             this.btnPersoneller,
             this.btnGiderler,
-            this.btnKasa,
+            this.btnUyelik,
             this.barButtonItem16});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 17;
+            this.ribbonControl1.MaxItemId = 20;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -94,15 +94,8 @@
             // 
             // btnStoklar
             // 
-            this.btnStoklar.Caption = "Stoklar";
-            this.btnStoklar.Enabled = false;
-            this.btnStoklar.Id = 3;
-            this.btnStoklar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnStoklar.ImageOptions.Image")));
-            this.btnStoklar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnStoklar.ImageOptions.LargeImage")));
-            this.btnStoklar.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnStoklar.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnStoklar.Id = 17;
             this.btnStoklar.Name = "btnStoklar";
-            this.btnStoklar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnStoklar_ItemClick);
             // 
             // btnMusteriler
             // 
@@ -117,15 +110,8 @@
             // 
             // btnFirmalar
             // 
-            this.btnFirmalar.Caption = "Firmalar";
-            this.btnFirmalar.Enabled = false;
-            this.btnFirmalar.Id = 5;
-            this.btnFirmalar.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnFirmalar.ImageOptions.Image")));
-            this.btnFirmalar.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnFirmalar.ImageOptions.LargeImage")));
-            this.btnFirmalar.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnFirmalar.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnFirmalar.Id = 18;
             this.btnFirmalar.Name = "btnFirmalar";
-            this.btnFirmalar.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnFirmalar_ItemClick);
             // 
             // btnPersoneller
             // 
@@ -140,26 +126,19 @@
             // 
             // btnGiderler
             // 
-            this.btnGiderler.Caption = "Giderler";
-            this.btnGiderler.Enabled = false;
-            this.btnGiderler.Id = 7;
-            this.btnGiderler.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnGiderler.ImageOptions.Image")));
-            this.btnGiderler.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnGiderler.ImageOptions.LargeImage")));
-            this.btnGiderler.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGiderler.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnGiderler.Id = 19;
             this.btnGiderler.Name = "btnGiderler";
-            this.btnGiderler.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGiderler_ItemClick);
             // 
-            // btnKasa
+            // btnUyelik
             // 
-            this.btnKasa.Caption = "Üyelik";
-            this.btnKasa.Id = 8;
-            this.btnKasa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.Image")));
-            this.btnKasa.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.LargeImage")));
-            this.btnKasa.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnKasa.ItemAppearance.Normal.Options.UseFont = true;
-            this.btnKasa.Name = "btnKasa";
-            this.btnKasa.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnKasa_ItemClick);
+            this.btnUyelik.Caption = "Üyelik";
+            this.btnUyelik.Id = 8;
+            this.btnUyelik.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.Image")));
+            this.btnUyelik.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.LargeImage")));
+            this.btnUyelik.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnUyelik.ItemAppearance.Normal.Options.UseFont = true;
+            this.btnUyelik.Name = "btnUyelik";
+            this.btnUyelik.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnUyelik_ItemClick);
             // 
             // barButtonItem16
             // 
@@ -180,7 +159,7 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.btnUrunler);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnMusteriler);
             this.ribbonPageGroup1.ItemLinks.Add(this.btnPersoneller);
-            this.ribbonPageGroup1.ItemLinks.Add(this.btnKasa);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnUyelik);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // barButtonItem2
@@ -236,7 +215,7 @@
         private DevExpress.XtraBars.BarButtonItem btnFirmalar;
         private DevExpress.XtraBars.BarButtonItem btnPersoneller;
         private DevExpress.XtraBars.BarButtonItem btnGiderler;
-        private DevExpress.XtraBars.BarButtonItem btnKasa;
+        private DevExpress.XtraBars.BarButtonItem btnUyelik;
         private DevExpress.XtraBars.BarButtonItem barButtonItem16;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
