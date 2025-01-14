@@ -133,8 +133,8 @@
             // 
             this.btnUyelik.Caption = "Üyelik";
             this.btnUyelik.Id = 8;
-            this.btnUyelik.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.Image")));
-            this.btnUyelik.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnKasa.ImageOptions.LargeImage")));
+            this.btnUyelik.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnUyelik.ImageOptions.Image")));
+            this.btnUyelik.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnUyelik.ImageOptions.LargeImage")));
             this.btnUyelik.ItemAppearance.Normal.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.btnUyelik.ItemAppearance.Normal.Options.UseFont = true;
             this.btnUyelik.Name = "btnUyelik";
@@ -151,7 +151,7 @@
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1});
             this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Text = "Ticari Otomasyon";
+            this.ribbonPage1.Text = "Salon Otomasyon";
             // 
             // ribbonPageGroup1
             // 
@@ -194,7 +194,7 @@
             this.MaximizeBox = false;
             this.Name = "anamodul";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ticari Otomasyon";
+            this.Text = "Salon Otomasyon";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
